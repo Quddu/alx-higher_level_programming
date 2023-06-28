@@ -1,11 +1,20 @@
 #!/usr/bin/python3
-class Square:
-    """Class Square that defines a square object
-    """
-    def __init__(self, size):
-        """Initialize method that stores the size of the square
+""" defines a square """
 
-        Args:
-            param1 (int): size of the square
+
+class Square:
+    """ square with private instance attribute size """
+
+    def __init__(self, size=0):
         """
-        self.__size = size
+        Args:
+            size: size of the square
+        """
+
+        if type(size) is int:
+            if size < 0:
+                raise ValueError('size must be >= 0')
+            else:
+                self.__size = size
+        else:
+            raise TypeError('size must be an integ
