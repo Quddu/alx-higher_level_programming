@@ -1,25 +1,24 @@
 #!/usr/bin/python3
-""" Get all states """
+""" This script will list all state in the database """
 
-import MySQLdb
 from sys import argv
+import MySQLdb
 
+if __name__ == '__main__':
 
-if __name__ == "__main__":
+    db_user = argv[1]
+    db_password = argv[2]
+    db_name = argv[3]
 
-    conn = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=argv[1],
-        passwd=argv[2],
-        db=argv[3]
-    )
+    database = MySQLdb.connect(host='localhost',
+                               port=3306,
+                               user=db_user,
+                               password=db_password,
+                               db=db_name)
 
-    cur = conn.cursor()
-    cur.execute("SELECT id, name FROM states ORDER BY id ASC")
-    query_rows = cur.fetchall()
-    for row in query_rows:
+    cursor = database.cursor()
+
+    cursor.execute('SELECT id, name FROM states ORDER BY states.id ASC')
+
+    for row in cursor.fetchall():
         print(row)
-
-    cur.close()
-    conn.close()
