@@ -1,21 +1,28 @@
 #!/usr/bin/python3
-"""
-Lists all values in the states tables of a database where name
-matches the argument
-"""
-import sys
+""" cript that takes in an argument and displays all values in
+ the states table of hbtn_0e_0_usa where name matches the
+  argument."""
 import MySQLdb
+import sys
 
-if __name__ == '__main__':
-    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2],
-                         db=sys.argv[3], port=3306)
-
+if __name__ == "__main__":
+    db = MySQLdb.connect(host='localhost',
+                         user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3],
+                         port=3306)
+    """In order to put our new connnection to good use we
+     need to create a cursor object"""
     cur = db.cursor()
-    cur.execute("SELECT * \
-    FROM states \
-    WHERE CONVERT(`name` USING Latin1) \
-    COLLATE Latin1_General_CS = '{}';".format(sys.argv[4]))
-    states = cur.fetchall()
-
-    for state in states:
-        print(state)
+    """The execute function requires one parameter, the query."""
+    cur.execute("SELECT * FROM states\
+        WHERE BINARY name = '{}'\
+            ORDER BY id ASC".format(sys.argv[4]))
+    """Obtaining Query Results"""
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+    """ Close all cursors"""
+    cur.close()
+    """Close all databases"""
+    db.close()
