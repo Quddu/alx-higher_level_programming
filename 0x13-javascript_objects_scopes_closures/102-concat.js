@@ -1,6 +1,4 @@
 #!/usr/bin/node
-const fs = require('fs');
+const concat = require('concat');
 
-const fArg = fs.readFileSync(process.argv[2]).toString();
-const sArg = fs.readFileSync(process.argv[3]).toString();
-fs.writeFileSync(process.argv[4], fArg + sArg);
+concat(process.argv[2], process.argv[3], process.argv[4]);
