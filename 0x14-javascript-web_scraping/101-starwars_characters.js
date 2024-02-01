@@ -1,4 +1,5 @@
-t request = require('request');
+#!/usr/bin/node
+const request = require('request');
 
 function getDataFrom (url) {
   return new Promise(function (resolve, reject) {
