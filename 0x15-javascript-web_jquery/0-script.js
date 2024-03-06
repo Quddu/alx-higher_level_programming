@@ -1,3 +1,6 @@
 #!/usr/bin/node
-const header = document.querySelector('header');
-header.style.color = '#FF0000';
+const headers = document.getElementsByTagName('header');
+if (headers.length > 0) {
+    const header = headers[0];
+    header.style.color = '#FF0000';
+}
